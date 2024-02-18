@@ -1,0 +1,9 @@
+table_name: 'trp'
+source_sql: "select * from trp;"
+condition_column: 'Index'
+condition_value: '5'
+target_bucket: 'pyspark-trp'
+aws_access_key_id : 'AKIA2GXT73H7EPUAFWF6'
+aws_secret_access_key : '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'
+parquet_file1 : 'C:\Users\manissharma\Downloads\Pyspark-TRP\shared\parquet_part_1_{{DATE}}'
+parquet_file2 : 'C:\Users\manissharma\Downloads\Pyspark-TRP\shared\parquet_part_2_{{DATE}}'

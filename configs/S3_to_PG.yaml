@@ -1,0 +1,4 @@
+source_bucket: 'pyspark-trp'
+table: "trp"
+df_table: "tekdata"
+source_sql: "select * from tekdata limit 10;"
