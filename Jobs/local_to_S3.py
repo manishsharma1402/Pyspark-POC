@@ -2,6 +2,7 @@ from pyspark.sql import SparkSession
 import boto3
 import yaml
 
+#reading data from local folder and dumping on an S3 bucket folder
 def local_to_S3_from_yaml(yaml_file_path):
     try:
         with open(yaml_file_path, 'r') as config_file:
@@ -20,7 +21,7 @@ def local_to_S3_from_yaml(yaml_file_path):
             aws_access_key_id=aws_access_key_id,
             aws_secret_access_key=aws_secret_access_key
         )
-
+        #dumping data on S3 using boto client
         s3_client.upload_file(local_csv_path, s3_bucket_name, s3_key)
     except:
         print("there is error in your solution")
