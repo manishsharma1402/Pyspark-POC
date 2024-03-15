@@ -7,7 +7,7 @@ import pandas as pd
 
 
 
-
+#This function reads data from Postgres, converts it into parquet format, and dumps it on an s3 bucket 
 def PG_to_S3_from_yml(yml_file_path):
     try:
         with open(yml_file_path, 'r') as config_file:
