@@ -3,6 +3,7 @@ from pyspark.sql import SQLContext
 import boto3
 import yaml
 
+#this function excess yml file data
 def read_yml_file(file_path):
     try:
         with open(file_path, 'r') as file:
@@ -14,17 +15,18 @@ def read_yml_file(file_path):
 file_path = 'C:/Users/manissharma/Downloads/Pyspark-TRP/configs/S3_to_PG.yaml'
 yml_data = read_yml_file(file_path)
 
+#this function reads data from S3 and dumps on Postgres table
 def S3_to_PG_from_yml(yml_file_path):
     try:
         with open(yml_file_path, 'r') as config_file:
             config = yaml.safe_load(config_file)
-
+        #assigning important and required data to variables
         aws_access_key_id = config['aws_access_key_id']
         aws_secret_access_key = config['aws_secret_access_key']
         s3_bucket_name = config['source_bucket']
         s3_key = config['s3_key']
         local_csv_path = config['local_csv_path']
-
+        #creating a spark session
         spark = SparkSession.builder.appName("S3-to-PG").getOrCreate()
         sc = SQLContext(spark)
 
@@ -35,6 +37,7 @@ def S3_to_PG_from_yml(yml_file_path):
         df = spark.read.option("header","true").csv(path)
 
         df.show()
+        #creating a pyspark table and assigning data frame data to it
         sc.registerDataFrameAsTable(df, yml_data['df_table'])
         df_table=sc.sql(yml_data['source_sql'])
         df_table.show()
