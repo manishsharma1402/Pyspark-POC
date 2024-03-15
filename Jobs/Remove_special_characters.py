@@ -25,7 +25,7 @@ sc.registerDataFrameAsTable(df, "peoplesoft")
 df_table=sc.sql("select * from peoplesoft")
 # df_table.show()
 
-
+#query to remove any special characters in table
 query = """
     SELECT
         TRIM(BOTH '-%$@#!^&*()[]{}<>"'' ' FROM Col1) AS Col1,
